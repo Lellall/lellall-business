@@ -6,7 +6,6 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/redux/store";
-import { useLogoutMutation } from "@/redux/api/auth/auth.api";
 import { toast } from "react-toastify";
 import { selectAuth, logout } from "@/redux/api/auth/auth.slice";
 
@@ -55,16 +54,22 @@ const NavMenu = styled.ul`
   @media (max-width: 768px) {
     display: ${(props) => (props.isOpen ? "flex" : "none")};
     flex-direction: column;
-    position: absolute;
-    top: 100%;
+    position: fixed;
+    top: 0;
     left: 0;
     right: 0;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
     background: ${(props) => props.background || "#032f30"};
     padding: 20px;
     align-items: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    border-radius: ${(props) => props.borderRadius || "8px"};
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border-radius: ${(props) => props.borderRadius || "12px"};
+    transform: ${(props) => (props.isOpen ? "translateY(0)" : "translateY(-100%)")};
+    transition: transform 0.3s ease-in-out;
+    z-index: 100;
+    top: 80px; /* Adjust based on your header height */
   }
 `;
 
@@ -74,7 +79,8 @@ const NavItem = styled.li`
   font-weight: 300;
   color: ${(props) => props.color || "white"};
 
-  a, button {
+  a,
+  button {
     color: ${(props) => props.color || "white"};
     text-decoration: none;
     display: flex;
@@ -176,10 +182,9 @@ export default function Navbar({ color = "white", background, boxShadow, width, 
   const dispatch = useDispatch();
   const { isAuthenticated, user, refreshToken } = useSelector(selectAuth);
 
-  console.log(isAuthenticated, 'isAuthenticated');
+  console.log(isAuthenticated, "isAuthenticated");
 
-
-  const toggleDropdown = (menu: string | null) => {
+  const toggleDropdown = (menu) => {
     setDropdown(dropdown === menu ? null : menu);
   };
 
@@ -204,7 +209,6 @@ export default function Navbar({ color = "white", background, boxShadow, width, 
 
   const handleLogout = async () => {
     try {
-      // Cookies.remove("authToken");
       dispatch(logout());
       localStorage.removeItem("access_token");
       localStorage.removeItem("refresh_token");
@@ -212,8 +216,7 @@ export default function Navbar({ color = "white", background, boxShadow, width, 
       navigate("/shop");
       toast.success("Logged out successfully!");
     } catch (error) {
-      console.log(error, 'error');
-
+      console.log(error, "error");
       toast.error("Logout failed. Please try again.");
     }
     setIsOpen(false);
@@ -255,7 +258,11 @@ export default function Navbar({ color = "white", background, boxShadow, width, 
                   <DropdownItem
                     key={item}
                     color={color}
-                    onClick={() => { navigate(`/shop?category=${item.toLowerCase()}`); setIsOpen(false); toggleDropdown(null); }}
+                    onClick={() => {
+                      navigate(`/shop?category=${item.toLowerCase()}`);
+                      setIsOpen(false);
+                      toggleDropdown(null);
+                    }}
                   >
                     {item}
                   </DropdownItem>
@@ -272,10 +279,10 @@ export default function Navbar({ color = "white", background, boxShadow, width, 
           {isAuthenticated ? (
             <>
               <NavItem color={color}>
-                <a onClick={() => { navigate("/terms") }}>Privacy & Policy</a>
+                <a onClick={() => { navigate("/terms"); setIsOpen(false); }}>Privacy & Policy</a>
               </NavItem>
               <NavItem color={color}>
-                <a onClick={() => { navigate("/precurement"); setIsOpen(false); }}>Procurement</a>
+                <a onClick={() => { navigate("/procurement"); setIsOpen(false); }}>Procurement</a>
               </NavItem>
               <NavItem color={color}>
                 <a onClick={handleLogout}>Logout</a>
