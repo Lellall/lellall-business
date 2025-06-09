@@ -4,7 +4,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { Button, CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import Subs from "../../assets/Subs.svg";
+import Subs from "../../../src/assets/Subs.svg";
 
 import { BaseUrl } from '@/utils/config';
 import OrderConfirmation from './order-confirm';
