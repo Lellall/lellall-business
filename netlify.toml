@@ -1,13 +1,15 @@
-[context.production]
-command = "npm run build"
-publish = "dist"
-branch = "master"
+[build]
+  command = "npm run build"
+  publish = "dist"
 
-[context.deploy-preview]
-command = "npm run build"
-publish = "dist"
+[build.environment]
+  NODE_VERSION = "18"
+
+[context.production]
+  branch = "master"
 
 [context.staging]
-command = "npm run build"
-publish = "dist"
-branch = "develop"
+  branch = "develop"
+
+[context.deploy-preview]
+# You can override build/publish if different
