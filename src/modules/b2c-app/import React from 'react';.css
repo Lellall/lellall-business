@@ -1,0 +1,243 @@
+import React from 'react';
+import styled from 'styled-components';
+import logo from '../../../assets/new-logo.svg';
+import LaptopMockup from '../../../assets/jkj.svg';
+import PhoneMockup from '../../../assets/xp.png';
+import Navbar from './components/navbar';
+import { StyledButton } from '@/components/button/button-lellall';
+
+const HeroSection = styled.section`
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: #000;
+  color: #fff;
+  overflow: hidden;
+`;
+
+const BackgroundSwirl = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150%;
+  height: 150%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at center, rgba(91,198,198,0.6), transparent 70%);
+  filter: blur(200px);
+  z-index: 1;
+`;
+
+const Nav = styled.nav`
+  position: relative;
+  z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 4rem;
+`;
+
+const NavLinks = styled.ul`
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`;
+
+const NavLink = styled.li`
+  cursor: pointer;
+  font-weight: 500;
+  &:hover { opacity: 0.7; }
+`;
+
+const SignInButton = styled.button`
+  background: #fff;
+  color: #000;
+  border: none;
+  border-radius: 999px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  &:hover { opacity: 0.9; }
+`;
+
+const HeroContent = styled.div`
+  position: relative;
+  z-index: 5;
+  max-width: 600px;
+  margin: 0;
+  padding: 8rem 4rem 2rem;
+  text-align: left;
+`;
+
+const Subtitle = styled.h4`
+  font-size: 0.875rem;
+  letter-spacing: 0.1rem;
+  margin-bottom: 1rem;
+  color: white;
+`;
+
+const Title = styled.h1`
+  font-size: 3rem;
+  line-height: 1.2;
+  font-weight: 700;
+  margin: 0 0 1.5rem;
+`;
+
+const Description = styled.p`
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  color: #ddd;
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start;
+`;
+
+const PrimaryButton = styled.button`
+  background: #fff;
+  color: #000;
+  border: none;
+  border-radius: 999px;
+  padding: 0 2rem;
+  font-weight: 500;
+  cursor: pointer;
+  &:hover { opacity: 0.9; }
+`;
+
+const SecondaryButton = styled.button`
+  background: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 999px;
+  padding: 0.75rem 2rem;
+  font-weight: 500;
+  cursor: pointer;
+  &:hover { background: rgba(255,255,255,0.1); }
+`;
+
+// Updated DevicesWrapper with responsive and centered positioning
+const DevicesWrapper = styled.div`
+  position: absolute;
+  top: 50%;
+  right: 10%;
+  width: 700px;
+  height: 500px;
+  transform: translateY(-50%);
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 1024px) {
+    width: 500px;
+    right: 5%;
+  }
+
+  @media (max-width: 768px) {
+    display: none; /* Hide devices on smaller screens to avoid clutter */
+  }
+`;
+
+// Updated Laptop with adjusted size, position, and subtle animation
+const Laptop = styled.img`
+  position: absolute;
+  top: 55px;
+  right: 220px;
+  width: 750px;
+  border-radius: 1rem;
+//   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+//   transform: rotate(-8deg);
+  z-index: 4;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    // transform: rotate(-8deg) translateY(-10px);
+  }
+
+  @media (max-width: 1024px) {
+    width: 300px;
+    right: 150px;
+  }
+`;
+
+// Updated Phone with adjusted size, position, and subtle animation
+const Phone = styled.img`
+  position: absolute;
+  top: 100px;
+  right: 50px;
+  width: 250px;
+  border-radius: 1rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  transform: rotate(8deg);
+  z-index: 5;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: rotate(8deg) translateY(-10px);
+  }
+
+  @media (max-width: 1024px) {
+    width: 180px;
+    right: 20px;
+    top: 80px;
+  }
+`;
+
+const Logo = styled.img`
+  width: 150px;
+  height: 100px;
+
+  @media (max-width: 768px) {
+    width: 120px;
+    height: 80px;
+  }
+`;
+
+const Hero = () => (
+    <HeroSection>
+        <BackgroundSwirl />
+        <Navbar />
+
+        <HeroContent>
+            <Subtitle>MANAGE SMARTER, SHOP FASTER</Subtitle>
+            <Title>
+                Connecting You, <br /> with <span>Fresh Local Goods.</span>
+
+            </Title>
+            <Description>
+                Our job is to provide you with the best products and with fast delivery on time.
+            </Description>
+            <ButtonGroup>
+                <StyledButton
+                    style={{ padding: "10px 15px", fontWeight: 500, borderRadius: "50px" }}
+                    background="#fff"
+                    color="#000"
+                    width="130px"
+                    variant="outline"
+                >
+                    Visit Store
+                </StyledButton>
+                <StyledButton
+                    style={{ padding: "10px 15px", fontWeight: 500, borderRadius: "50px" }}
+                    background="#F06D06"
+                    color="#fff"
+                    width="130px"
+                    variant="outline"
+                >
+                    Contact Sales
+                </StyledButton>
+            </ButtonGroup>
+        </HeroContent>
+
+        <DevicesWrapper>
+            <Laptop src={LaptopMockup} alt="Laptop mockup" />
+            <Phone src={PhoneMockup} alt="Phone mockup" />
+        </DevicesWrapper>
+    </HeroSection>
+);
+
+export default Hero;
