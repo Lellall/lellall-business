@@ -5,6 +5,7 @@ import playstoreIcon from './google.svg';
 import QCommerceMockup from '../../../assets/xp.png';
 import ProcurementMockup from '../../../assets/io.png';
 import Banner from './banner';
+import { useNavigate } from 'react-router-dom';
 
 const InstallSection = styled.section`
   width: 100%;
@@ -208,6 +209,7 @@ margin-top: -10px;
 `
 
 const InstallApp = () => {
+  const navigate = useNavigate()
   return (
     <div>
 
@@ -219,13 +221,17 @@ const InstallApp = () => {
           <Subheading color='#333'>
             Shop local vendors with unmatched speed and ease. Get it on iOS or Android now.
           </Subheading>
-          <StoreButtons>
-            <a href="https://www.apple.com/app-store/" target="_blank" rel="noopener noreferrer">
+          <StoreButtons disabled={true}>
+            {/* <a href="https://www.apple.com/app-store/" target="_blank" rel="noopener noreferrer">
               <img src={Apple} alt="Download on the App Store" />
             </a>
             <a href="https://play.google.com/store" target="_blank" rel="noopener noreferrer">
               <img src={playstoreIcon} alt="Get it on Google Play" />
-            </a>
+            </a> */}
+            <WebAppButton style={{opacity:0.1}}>
+              Coming Soon
+            </WebAppButton>
+
           </StoreButtons>
         </AppHalf>
         <AppHalf bg="#F06D06" style={{ borderTopRightRadius: "10px" }}>
@@ -235,7 +241,7 @@ const InstallApp = () => {
           <Subheading color='#fff'>
             Transform bulk purchasing with our cutting-edge web platform. Launch now.
           </Subheading>
-          <WebAppButton href="https://procurement.lellall.com" target="_blank" rel="noopener noreferrer">
+          <WebAppButton onClick={() => navigate('/procurement')}>
             Get Started
           </WebAppButton>
         </AppHalf>

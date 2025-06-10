@@ -1,19 +1,35 @@
-import { toast } from "react-toastify"
-import { LoginRequest, LoginResponse } from "./typings"
-import { setAuthState, logout } from "./auth.slice"
-import { baseApi } from "../baseApi"
-import { ErrorHandler } from "@/utils/error-handler"
+import { toast } from "react-toastify";
+import { LoginRequest, LoginResponse } from "./typings";
+import { setAuthState, logout } from "./auth.slice";
+import { baseApi } from "../baseApi";
+import { ErrorHandler } from "@/utils/error-handler";
 
-interface EmailRequest {
-  email: string
+// Define types for the inquiry request and response
+interface InquiryRequest {
+  name: string;
+  email: string;
+  company?: string;
+  phone?: string;
+  message: string;
 }
 
-interface EmailResponse {
-  content: string
+interface InquiryResponse {
+  message: string;
+  data: {
+    id: string;
+    name: string;
+    email: string;
+    company?: string;
+    phone?: string;
+    message: string;
+    createdAt: string;
+    updatedAt: string;
+  };
 }
 
 const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    // Existing endpoints
     login: builder.mutation<LoginResponse, LoginRequest>({
       query: (credentials) => ({
         url: "/auth/login",
@@ -22,22 +38,20 @@ const authApi = baseApi.injectEndpoints({
       }),
       async onQueryStarted(_args, { dispatch, queryFulfilled: qf }) {
         qf.then((data) => {
-          localStorage.setItem('access_token', data.data.access_token)
-          localStorage.setItem('user', data.data.user)
-          localStorage.setItem('refresh_token', data.data.refresh_token)
+          localStorage.setItem('access_token', data.data.access_token);
+          localStorage.setItem('user', JSON.stringify(data.data.user)); // Stringify user object
+          localStorage.setItem('refresh_token', data.data.refresh_token);
           dispatch(
             setAuthState({
               isAuthenticated: true,
               accessToken: data.data.access_token,
-              // user: data.user,
               refreshToken: data.data.refresh_token,
               user: data.data.user,
             })
-          )
+          );
         }).catch((err) => {
-          alert(err)
-          ErrorHandler(err)
-        })
+          ErrorHandler(err);
+        });
       },
     }),
     getProducts: builder.query({
@@ -52,10 +66,9 @@ const authApi = baseApi.injectEndpoints({
         method: "POST",
         body: credentials,
       }),
-
-      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+      async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
         try {
-          const { data } = await queryFulfilled
+          const { data } = await queryFulfilled;
           dispatch(
             setAuthState({
               isAuthenticated: true,
@@ -63,11 +76,11 @@ const authApi = baseApi.injectEndpoints({
               refreshToken: data.refresh_token,
               user: data.user,
             })
-          )
-          return data
+          );
+          return data;
         } catch (err) {
-          Errorhandler(err)
-          return err
+          ErrorHandler(err);
+          throw err;
         }
       },
     }),
@@ -82,11 +95,11 @@ const authApi = baseApi.injectEndpoints({
           toast.success(`${res.data.content}`, {
             position: "top-right",
           })
-        ).catch((err) => {
-          toast.error(`${err?.status?.message}`, {
+        ).catch((err) =>
+          toast.error(`${err?.status?.message || 'An error occurred'}`, {
             position: "top-right",
           })
-        })
+        );
       },
     }),
     resetPassword: builder.mutation({
@@ -103,12 +116,33 @@ const authApi = baseApi.injectEndpoints({
         url: "/logout",
         method: "POST",
       }),
-      async onQueryStarted(arg, { dispatch }) {
-        dispatch(logout())
+      async onQueryStarted(_arg, { dispatch }) {
+        dispatch(logout());
+      },
+    }),
+    // New inquiry endpoint
+    createInquiry: builder.mutation<InquiryResponse, InquiryRequest>({
+      query: (data) => ({
+        url: "/inquiries",
+        method: "POST",
+        body: data,
+      }),
+      async onQueryStarted(_args, { queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          toast.success("Inquiry submitted successfully!", {
+            position: "top-right",
+          });
+        } catch (err) {
+          toast.error("Failed to submit inquiry. Please try again.", {
+            position: "top-right",
+          });
+          ErrorHandler(err);
+        }
       },
     }),
   }),
-})
+});
 
 export const {
   useLoginMutation,
@@ -116,4 +150,5 @@ export const {
   useRegisterMutation,
   useResetPasswordMutation,
   useRequestPasswordResetMutation,
-} = authApi
+  useCreateInquiryMutation, // Export the new hook
+} = authApi;

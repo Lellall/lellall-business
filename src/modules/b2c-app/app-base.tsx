@@ -214,6 +214,7 @@ const AppBase = () => {
               Start Shopping
             </StyledButton>
             <StyledButton
+              onClick={() => navigate('/procurement')}
               style={{
                 padding: '19px 15px',
                 fontWeight: 500,

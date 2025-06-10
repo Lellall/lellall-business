@@ -271,65 +271,65 @@ const MainContent = styled.main`
 `;
 
 const AboutUs = () => {
-    return (
-        <div>
-            <AboutSection>
-                <Navbar
-                    color="#000000"
-                    background="white"
-                    boxShadow="box-shadow: -1px 2px 5px -21px rgba(0,0,0,0.75);"
-                    width="500px"
-                    padding="10px"
-                    borderRadius="50px"
-                />
-                <ContentWrapper>
-                    <Heading>
-                        About <span>Us</span>
-                    </Heading>
-                    <Subheading>
-                        We are a passionate team dedicated to making your shopping experience seamless, fast, and delightful. Our mission is to connect you with the products you love through innovation and exceptional service.
-                    </Subheading>
-                    <ButtonContainer>
-                        <StyledButton
-                            style={{
-                                padding: '16px 20px',
-                                fontWeight: 600,
-                                borderRadius: '40px',
-                            }}
-                            background="#F06D06"
-                            color="#fff"
-                            width="190px"
-                            variant="outline"
-                        >
-                            <Bookmark size="28" color="#fff" style={{ marginRight: '8px' }} />
-                            Contact Us
-                        </StyledButton>
-                    </ButtonContainer>
-                </ContentWrapper>
-            </AboutSection>
-            <MainContent>
-                <FoundersSection>
-                    <FounderCard>
-                        <FounderImage1 src={founder1} alt="Mustapha Muhammad" />
-                        <FounderName>Mustapha Muhammad</FounderName>
-                        <FounderTitle>Co-Founder & CEO</FounderTitle>
-                        <FounderBio>
-                            Mustapha brings over a decade of experience in e-commerce and logistics, driving our vision to revolutionize online shopping with a customer-first approach.
-                        </FounderBio>
-                    </FounderCard>
-                    <FounderCard>
-                        <FounderImage src={founder2} alt="Yahya Ahmad" />
-                        <FounderName>Yahya Ahmad</FounderName>
-                        <FounderTitle>Co-Founder & CTO</FounderTitle>
-                        <FounderBio>
-                            Yahya is a tech visionary who leads our platform's innovation, ensuring a seamless and secure experience for every user.
-                        </FounderBio>
-                    </FounderCard>
-                </FoundersSection>
-                <FooterComponent />
-            </MainContent>
-        </div>
-    );
+  return (
+    <div>
+      <AboutSection>
+        <Navbar
+          color="#000000"
+          background="white"
+          boxShadow="box-shadow: -1px 2px 5px -21px rgba(0,0,0,0.75);"
+          width="500px"
+          padding="10px"
+          borderRadius="50px"
+        />
+        <ContentWrapper>
+          <Heading>
+            About <span>Us</span>
+          </Heading>
+          <Subheading>
+            We are a passionate team dedicated to making your shopping experience seamless, fast, and delightful. Our mission is to connect you with the products you love through innovation and exceptional service.
+          </Subheading>
+          <ButtonContainer>
+            <StyledButton
+              style={{
+                padding: '16px 20px',
+                fontWeight: 600,
+                borderRadius: '40px',
+              }}
+              background="#F06D06"
+              color="#fff"
+              width="190px"
+              variant="outline"
+            >
+              <Bookmark size="28" color="#fff" style={{ marginRight: '8px' }} />
+              Contact Us
+            </StyledButton>
+          </ButtonContainer>
+        </ContentWrapper>
+      </AboutSection>
+      <MainContent>
+        <FoundersSection>
+          <FounderCard>
+            <FounderImage1 src={founder1} alt="Mustapha Muhammad" />
+            <FounderName>Mustapha Muhammad</FounderName>
+            <FounderTitle>Co-Founder & CEO</FounderTitle>
+            <FounderBio>
+              Mustapha Muhammad, a tech entrepreneur and business strategist with a Computer Science degree, specializes in operations and digital transformation, streamlining business processes.
+            </FounderBio>
+          </FounderCard>
+          <FounderCard>
+            <FounderImage src={founder2} alt="Yahya Ahmad" />
+            <FounderName>Yahya Ahmad</FounderName>
+            <FounderTitle>Co-Founder & CTO</FounderTitle>
+            <FounderBio>
+            Yahaya Ahmad, a Full Stack Developer and CTO, is passionate about building innovative digital solutions that drive business growth. With expertise in designing and scaling products, he excels at creating seamless and impactful user experiences.
+            </FounderBio>
+          </FounderCard>
+        </FoundersSection>
+        <FooterComponent />
+      </MainContent>
+    </div>
+  );
 };
 
 export default AboutUs;

@@ -32,6 +32,7 @@ import AboutUs from "./modules/b2c-app/about-us";
 import TransactionStatusPage from "./modules/b2c-app/transaction-status";
 import VerificationPage from "./auth/success";
 import TermsAndConditions from "./modules/b2c-app/terms";
+import Inquiry from "./modules/b2c-app/inquiry";
 
 const App = () => {
   // const { isAuthenticated } = useSelector(selectAuth);
@@ -187,6 +188,14 @@ const App = () => {
                   element={
                     <>
                       <TermsAndConditions />
+                    </>
+                  }
+                />
+                <Route
+                  path="/procurement"
+                  element={
+                    <>
+                      <Inquiry />
                     </>
                   }
                 />
