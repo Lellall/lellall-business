@@ -9,6 +9,7 @@ import { theme } from '@/theme/theme';
 import Navbar from './components/navbar';
 import FooterComponent from './Footer';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 // Validation schema
 const schema = yup.object({
@@ -204,7 +205,10 @@ const Inquiry = () => {
         setError(null);
         try {
             await axios.post('https://api-b2b-prod.lellall.com/inquiries', data);
-            reset(); // Reset form on successful submission
+            toast.success("Inquiry submitted successfully!", {
+              position: "top-right",
+            });
+            await reset(); // Reset form on successful submission
         } catch (error) {
             setError('Failed to submit inquiry. Please try again.');
             console.error('Submission error:', error);
