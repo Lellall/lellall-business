@@ -203,7 +203,7 @@ const Inquiry = () => {
         setIsLoading(true);
         setError(null);
         try {
-            await axios.post('https://api-b2b-prod.lellall.com/', data);
+            await axios.post('https://api-b2b-prod.lellall.com/inquiries', data);
             reset(); // Reset form on successful submission
         } catch (error) {
             setError('Failed to submit inquiry. Please try again.');
