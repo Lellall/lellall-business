@@ -208,7 +208,6 @@ const Inquiry = () => {
             toast.success("Inquiry submitted successfully!", {
               position: "top-right",
             });
-            await reset(); // Reset form on successful submission
         } catch (error) {
             setError('Failed to submit inquiry. Please try again.');
             console.error('Submission error:', error);
