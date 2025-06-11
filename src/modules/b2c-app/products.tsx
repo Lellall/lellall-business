@@ -1,4 +1,3 @@
-// Products.jsx
 import { useGetProductsQuery, useGetCategoriesQuery } from "@/redux/api/product.api";
 import { SearchNormal1 } from "iconsax-react";
 import React, { useState, useEffect } from "react";
@@ -12,7 +11,7 @@ const CardWrapper = styled.div`
   width: 250px;
   max-width: 250px;
   box-sizing: border-box;
-  height: 220px;
+  min-height: 220px; /* Changed to min-height for flexibility */
   cursor: pointer;
   border-radius: 8px;
   box-shadow: 15px 15px 30px rgba(211, 209, 216, 0.25);
@@ -33,12 +32,13 @@ const CardWrapper = styled.div`
 
 const Image = styled.img`
   width: 100%;
-  height: 120px;
-  object-fit: cover;
+  height: 120px; /* Fixed height for consistency */
+  object-fit: contain; /* Show full image without cropping */
   object-position: center;
   display: block;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
+  background: #fff; /* Background for empty space */
 `;
 
 const CardContent = styled.div`
@@ -305,8 +305,8 @@ const Products = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState(null); // Changed to null for categoryId
-  const [searchQuery, setSearchQuery] = useState(""); // State for search input
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1);
   const [size] = useState(60);
   const [allProducts, setAllProducts] = useState([]);
@@ -319,8 +319,8 @@ const Products = () => {
   const { data, isLoading, error, isFetching } = useGetProductsQuery({
     page,
     size,
-    filter: searchQuery || undefined, // Pass search query
-    categoryId: selectedCategory || undefined, // Pass selected category ID
+    filter: searchQuery || undefined,
+    categoryId: selectedCategory || undefined,
   });
 
   // Normalize products data
@@ -338,7 +338,7 @@ const Products = () => {
   // Normalize categories data
   const categories = categoriesData?.data || categoriesData?.categories || categoriesData || [];
   const categoryList = [
-    { id: null, name: "All" }, // Add "All" category for no filtering
+    { id: null, name: "All" },
     ...categories.map((cat) => ({ id: cat.id, name: cat.name })),
   ];
 
@@ -354,15 +354,15 @@ const Products = () => {
   // Handle search input
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
-    setPage(1); // Reset to first page on new search
-    setAllProducts([]); // Clear products to show new results
+    setPage(1);
+    setAllProducts([]);
   };
 
   // Handle category selection
   const handleCategorySelect = (categoryId) => {
     setSelectedCategory(categoryId);
-    setPage(1); // Reset to first page on category change
-    setAllProducts([]); // Clear products to show new results
+    setPage(1);
+    setAllProducts([]);
     setIsSidebarOpen(false);
     setIsModalOpen(false);
   };
@@ -407,9 +407,6 @@ const Products = () => {
     console.error("Query Error:", error);
     return <div>Error loading products: {error.message || "Unknown error"}</div>;
   }
-
-  // No products
-  // if (!allProducts.length && !isLoading) return <div>No products available.</div>;
 
   return (
     <div className="flex min-h-screen font-sans">

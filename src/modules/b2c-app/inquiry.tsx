@@ -2,12 +2,13 @@ import styled from 'styled-components';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import axios from 'axios';
 import { StyledButton } from '@/components/button/button-lellall';
 import Input from '@/components/input/input';
 import { theme } from '@/theme/theme';
 import Navbar from './components/navbar';
 import FooterComponent from './Footer';
-import { useCreateInquiryMutation } from '@/redux/api/auth/auth.api';
+import { useState } from 'react';
 
 // Validation schema
 const schema = yup.object({
@@ -186,11 +187,11 @@ const MainContent = styled.main`
 `;
 
 const Inquiry = () => {
-    const { control, handleSubmit, formState: { errors } } = useForm({
+    const { control, handleSubmit, formState: { errors }, reset } = useForm({
         resolver: yupResolver(schema),
     });
-
-    const [createInquiry, { isLoading }] = useCreateInquiryMutation();
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     const onSubmit = async (data: {
         name: string;
@@ -199,10 +200,16 @@ const Inquiry = () => {
         phone?: string;
         message: string;
     }) => {
+        setIsLoading(true);
+        setError(null);
         try {
-            await createInquiry(data).unwrap();
+            await axios.post('https://api-b2b-prod.lellall.com/', data);
+            reset(); // Reset form on successful submission
         } catch (error) {
-            // Error toast handled in RTK Query
+            setError('Failed to submit inquiry. Please try again.');
+            console.error('Submission error:', error);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -301,6 +308,11 @@ const Inquiry = () => {
                                     />
                                 )}
                             />
+                            {error && (
+                                <p style={{ color: 'red', textAlign: 'center', margin: '10px 0' }}>
+                                    {error}
+                                </p>
+                            )}
                             <div className="mt-4">
                                 <StyledButton
                                     background={theme.colors.active}
