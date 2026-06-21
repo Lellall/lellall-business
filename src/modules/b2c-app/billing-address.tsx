@@ -295,7 +295,7 @@ const BillingAddress = ({ isShopsClose, bundle }) => {
               <Label>Delivery Address</Label>
               <AutocompleteWrapper hasError={mapError}>
                 <GooglePlacesAutocomplete
-                  apiKey="AIzaSyBrdpKCFrR1oMxYds0rkd80BWkhzREXmSY"
+                  apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
                   selectProps={{
                     value,
                     onChange: setValue,
