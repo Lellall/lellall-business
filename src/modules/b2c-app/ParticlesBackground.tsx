@@ -1,16 +1,25 @@
-import React, { useCallback } from 'react';
-import Particles from 'react-particles';
+import React, { useEffect, useState } from 'react';
+import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { loadLinksPreset } from '@tsparticles/preset-links';
 
 const ParticlesBackground = () => {
-  const particlesInit = useCallback(async (engine) => {
-    await loadLinksPreset(engine); // Load the links preset
+  const [init, setInit] = useState(false);
+
+  useEffect(() => {
+    initParticlesEngine(async (engine) => {
+      await loadLinksPreset(engine); // Load the links preset
+    }).then(() => {
+      setInit(true);
+    });
   }, []);
+
+  if (!init) {
+    return <></>;
+  }
 
   return (
     <Particles
       id="tsparticles"
-      init={particlesInit}
       options={{
         preset: 'links', // Use the links preset
         background: {
