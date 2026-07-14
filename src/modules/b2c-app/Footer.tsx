@@ -172,7 +172,7 @@ const FooterComponent = () => {
         <ul>
           <li><a onClick={() => { navigate("/terms") }}>Terms & Conditions</a></li>
           <li><a onClick={() => { navigate("/terms") }}>Refund & Cancellation</a></li>
-          <li><a onClick={() => { navigate("/terms") }}>Privacy Policy</a></li>
+          <li><a onClick={() => { navigate("/privacy-policy") }}>Privacy Policy</a></li>
         </ul>
       </FooterSection>
 

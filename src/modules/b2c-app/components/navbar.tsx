@@ -276,11 +276,12 @@ export default function Navbar({ color = "white", background, boxShadow, width, 
           <NavItem color={color}>
             <a onClick={() => { navigate("/about-us"); setIsOpen(false); }}>About Us</a>
           </NavItem>
+          <NavItem color={color}>
+            <a onClick={() => { navigate("/privacy-policy"); setIsOpen(false); }}>Privacy Policy</a>
+          </NavItem>
           {isAuthenticated ? (
             <>
-              <NavItem color={color}>
-                <a onClick={() => { navigate("/terms"); setIsOpen(false); }}>Privacy & Policy</a>
-              </NavItem>
+
               <NavItem color={color}>
                 <a onClick={() => { navigate("/procurement"); setIsOpen(false); }}>Procurement</a>
               </NavItem>
