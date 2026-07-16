@@ -189,9 +189,15 @@ const AppBase = () => {
   const navigate = useNavigate()
   return (
     <div>
+      <div style={{ width: '100%', background: '#F06D06', color: 'white', padding: '10px 20px', textAlign: 'center', fontSize: '14px', fontWeight: 500, zIndex: 50, position: 'relative' }}>
+        🚀 <strong>SidqahLabs B2B Platform is Live:</strong> Successfully launched digital procurement for Sanctum Private Lounge!
+      </div>
       <HeroSection>
         <Navbar />
         <ContentWrapper>
+          <div style={{ color: '#F06D06', fontSize: '16px', fontWeight: 'bold', marginBottom: '10px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+            Powered by SidqahLabs
+          </div>
           <Heading>
             Shop <br /> <span>Fresh Goods & Procurement.</span>
           </Heading>
