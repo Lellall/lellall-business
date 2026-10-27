@@ -187,6 +187,7 @@ const Ring = styled.span<{ $c: string; $s: number; $x: string; $y: string; $r?: 
   border: ${({ $s }) => Math.round($s / 11)}px solid ${({ $c }) => $c}; opacity: .85;
   transform: rotate(calc(var(--r) * 1deg)) scaleY(.62); translate: 0 calc(var(--sy, 0) * ${({ $k }) => $k ?? -0.16} * 1px);
   animation: drift 12s ease-in-out infinite alternate;
+  @media (max-width: 760px) { display: none; }
 `;
 
 /* ───────────────────────── nav ───────────────────────── */
@@ -236,7 +237,7 @@ const RotWord = () => {
   return <Rot aria-hidden="true">{words.map((w, j) => <span key={w} className={j === k ? "on" : j === (k + words.length - 1) % words.length ? "off" : ""}>{w}</span>)}</Rot>;
 };
 const HeroLead = styled.p`font-size: clamp(17px, 2vw, 20px); line-height: 1.7; color: ${c.muted}; max-width: 640px; margin: 0 0 34px;`;
-const Row = styled.div`display: flex; flex-wrap: wrap; gap: 14px; justify-content: center;`;
+const Row = styled.div`display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; @media (max-width: 560px) { flex-direction: column; align-items: stretch; width: 100%; max-width: 320px; > * { justify-content: center; } }`;
 const Kinds = styled.ul`list-style: none; padding: 0; margin: 30px 0 0; display: flex; flex-wrap: wrap; gap: 8px 22px; justify-content: center; li { font-size: 14.5px; font-weight: 700; color: ${c.muted}; display: inline-flex; gap: 8px; align-items: center; } svg { color: ${c.green}; }`;
 
 /* ───────────────────────── browser frame + screens ───────────────────────── */
