@@ -33,6 +33,7 @@ import TransactionStatusPage from "./modules/b2c-app/transaction-status";
 import VerificationPage from "./auth/success";
 import TermsAndConditions from "./modules/b2c-app/terms";
 import Inquiry from "./modules/b2c-app/inquiry";
+import CompanyHome from "./modules/b2c-app/company-home";
 import PrivacyPolicy from "./modules/b2c-app/privacy-policy";
 
 const App = () => {
@@ -98,6 +99,14 @@ const App = () => {
               <>
                 <Route
                   path="/"
+                  element={
+                    <>
+                      <CompanyHome />
+                    </>
+                  }
+                />
+                <Route
+                  path="/store-home"
                   element={
                     <>
                       <AppBase />
